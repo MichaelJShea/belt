@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login_register/css/style.css' %}">    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou" rel="stylesheet">
+    
+</head>
+<body class="login-bg">
+    
+    <div class="conatiner col-6 container mt-2 mb-5 offset-1 bg-transparent text-white signup rounded">
+            <h1 class="login-title">Sign Up!</h1>
+            <form action="/register_user" method="POST">
+                {%csrf_token%}
+                <div class="form-group col-8">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" class="form-control-sm col-12" id="first_name" aria-describedby="first_name" placeholder="Enter First Name">
+                    {%if messages%}
+                        {% for message in messages %}
+                            {% if 'first_name' in message.tags %}
+                                <div class="is-invalid text-danger">
+                                    {{message}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group col-8">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" class="form-control-sm col-12" id="last_name" aria-describedby="last_name" placeholder="Enter Last Name">
+                    {%if messages%}
+                            {% for message in messages %}
+                                {% if 'last_name' in message.tags %}
+                                    <div class="is-invalid text-danger">
+                                        {{message}}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group col-8">
+                  <label for="email">Email</label>
+                  <input type="text" name="email" class="form-control-sm col-12" id="email" aria-describedby="email" placeholder="Enter Email">
+                  {%if messages%}
+                    {% for message in messages %}
+                      {% if 'email' in message.tags %}
+                          <div class="is-invalid text-danger">
+                                {{message}}
+                          </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  <small id="emailHelp" class="form-text text-white">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group col-8">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control-sm col-12" id="password" placeholder="Password">
+                    {%if messages%}
+                        {% for message in messages %}
+                            {% if 'password' in message.tags %}
+                                <div class="is-invalid text-danger">
+                                    {{message}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group col-8">
+                    <label for="confirm_pass">Confirm Password</label>
+                    <input type="password" name="confirm_pass" class="form-control-sm col-12" id="confirm_pass" placeholder="Confirm Password">
+                    {%if messages%}
+                        {% for message in messages %}
+                            {% if 'confirm_pass' in message.tags %}
+                                <div class="is-invalid text-danger">
+                                    {{message}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-sm btn-outline-light col-3 ml-3">Sign Up</button>
+                <a class="btn btn-sm btn-outline-light col-3 ml-3" href="/" role="button">Log In</a>
+            </form>
+    </div>
+</body>
+</html>

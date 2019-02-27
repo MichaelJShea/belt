@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Trip</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <h2 class="container text-center mt-4">Hello {{request.session.first_name}} Let's edit your Trip!</h2>
+    <div class="container text-center">
+        {% if messages  %}
+            {% for message in messages %}
+            <div class="is-invalid text-danger">
+            {{message}}
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <form class="container col-6" action="/trips/edit" method="POST">
+        {%csrf_token%}
+        <div class="form-group">
+              <label for="edit_destination">Destination:</label>
+              <input type="text" name = "edit_destination" class="form-control" id="destination" aria-describedby="destination" placeholder="{{edit_trip.destination}}" >
+        </div>
+        <div class="form-group">
+              <label for="edit_start_date">Start Date:</label>
+              <input type="date" name = "edit_start_date" class="form-control" id="start_date" aria-describedby="start_date" value ="{{edit_trip.start_date | date:'Y-m-d'}}">
+        </div>
+        <div class="form-group">
+              <label for="edit_end_date">End Date:</label>
+              <input type="date" name = "edit_end_date" class="form-control" id="end_date" aria-describedby="end_date" value ="{{edit_trip.end_date | date:'Y-m-d'}}">
+        </div>
+        <div class="form-group">
+                <label for="edit_plans">Trip Plans:</label>
+                <textarea class="form-control" name="edit_plans" id="plans" rows="3" value = "{{edit_trip.plan}}" placeholder="{{edit_trip.plan}}"></textarea>
+        </div>
+        <input type="hidden" name="trip_id" value="{{edit_trip.id}}">
+        <a class="btn btn-primary" href="/trips" role="button">Cancel</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+</body>
+</html>
